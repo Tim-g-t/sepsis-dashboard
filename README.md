@@ -1,69 +1,75 @@
-# Welcome to your Lovable project
+# Sepsis Risk Dashboard
 
-## Project info
+A comprehensive dashboard for monitoring and analyzing sepsis risk factors in healthcare settings. Built with React, TypeScript, and modern web technologies.
 
-**URL**: https://lovable.dev/projects/d1a30e5f-3fd4-443b-8f41-7149be5d4e09
+**Live Demo**: https://tim-g-t.github.io/sepsis-dashboard/
+**GitHub Repository**: https://github.com/Tim-g-t/sepsis-dashboard
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Real-time patient monitoring dashboard
+- Risk factor analysis and visualization
+- Department-wise risk charts
+- Patient detail views with vital signs
+- Responsive design for mobile and desktop
+- Dark/light theme support
 
-**Use Lovable**
+## Development
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d1a30e5f-3fd4-443b-8f41-7149be5d4e09) and start prompting.
+### Local Development
 
-Changes made via Lovable will be committed automatically to this repo.
+To run this project locally:
 
-**Use your preferred IDE**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Tim-g-t/sepsis-dashboard.git
+   cd sepsis-dashboard
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-Follow these steps:
+4. Open your browser and navigate to `http://localhost:8080`
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Build
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+To build the project for production:
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+The built files will be in the `dist` directory.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Technology Stack
 
-**Use GitHub Codespaces**
+- **Frontend**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Routing**: React Router DOM
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deployment
 
-## What technologies are used for this project?
+This project is automatically deployed to GitHub Pages using GitHub Actions. Every push to the main branch triggers a new deployment.
 
-This project is built with .
+## Contributing
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/d1a30e5f-3fd4-443b-8f41-7149be5d4e09) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License.
