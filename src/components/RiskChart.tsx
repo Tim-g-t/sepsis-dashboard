@@ -12,6 +12,7 @@ import {
 } from 'recharts';
 import { format } from 'date-fns';
 import { HistoricalData, RiskLevel } from '@/types/risk';
+import { useTheme } from "next-themes";
 
 interface RiskChartProps {
   data: HistoricalData[];
@@ -34,6 +35,8 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>)
 };
 
 const RiskChart: React.FC<RiskChartProps> = ({ data, riskLevel, className, height = 200 }) => {
+  const { theme } = useTheme();
+  
   // Process data for the chart
   const chartData = data.map(item => ({
     timestamp: item.timestamp,
@@ -49,6 +52,12 @@ const RiskChart: React.FC<RiskChartProps> = ({ data, riskLevel, className, heigh
   
   const color = colors[riskLevel];
   
+  // Theme-aware colors
+  const isDark = theme === 'dark';
+  const gridColor = isDark ? '#374151' : '#e5e7eb';
+  const axisColor = isDark ? '#6B7280' : '#9CA3AF';
+  const textColor = isDark ? '#F9FAFB' : '#374151';
+  
   return (
     <div className={className}>
       <ResponsiveContainer width="100%" height={height}>
@@ -62,19 +71,23 @@ const RiskChart: React.FC<RiskChartProps> = ({ data, riskLevel, className, heigh
               <stop offset="95%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#eaeaea" vertical={false} />
+          <CartesianGrid 
+            strokeDasharray="3 3" 
+            stroke={gridColor} 
+            vertical={false} 
+          />
           <XAxis
             dataKey="timestamp"
             tickFormatter={(value) => format(new Date(value), 'h:mm a')}
-            tick={{ fontSize: 10 }}
-            axisLine={{ stroke: '#eaeaea' }}
+            tick={{ fontSize: 10, fill: textColor }}
+            axisLine={{ stroke: axisColor }}
             tickLine={false}
             minTickGap={40}
           />
           <YAxis 
             domain={[0, 100]} 
-            tick={{ fontSize: 10 }}
-            axisLine={{ stroke: '#eaeaea' }}
+            tick={{ fontSize: 10, fill: textColor }}
+            axisLine={{ stroke: axisColor }}
             tickLine={false}
             width={30}
           />
