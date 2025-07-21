@@ -152,15 +152,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex justify-center gap-4 mb-6">
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-1">Risk Score</div>
-                <RiskScoreIndicator 
-                  score={patient.currentRiskScore} 
-                  size="md" 
-                  showValue={true} 
-                />
-              </div>
+            <div className="flex justify-center mb-6">
               <div className="text-center">
                 <div className="text-xs text-muted-foreground mb-1">Sepsis Risk</div>
                 <RiskScoreIndicator 
