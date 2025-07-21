@@ -116,18 +116,13 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
 
   return (
     <div className="h-full space-y-6">
-      <div className="flex items-center mb-6">
-        <Button variant="ghost" size="sm" onClick={onClose} className="mr-2">
-          <ArrowLeft className="h-4 w-4 mr-1" />
-          Back
-        </Button>
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold">{patient.name}</h1>
           <div className="text-sm text-muted-foreground">
             {patient.diagnosis} • Attending: {patient.attendingPhysician}
           </div>
         </div>
-        <div className="ml-auto flex items-center space-x-2">
+        <div className="flex items-center space-x-2">
           {patient.sepsisRisk >= 70 && (
             <div className="flex items-center bg-critical/10 text-critical border border-critical/30 px-3 py-1 rounded-full">
               <AlertCircle className="h-4 w-4 mr-1" />
@@ -143,8 +138,8 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="md:col-span-1">
+      <div className="grid grid-cols-1 gap-6">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg flex items-center">
               <User className="h-5 w-5 mr-2" />
@@ -165,27 +160,23 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
             
             <div className="space-y-4">
               <div>
-                <div className="text-sm text-muted-foreground">Age / Gender</div>
-                <div className="font-medium">{patient.age} years • {patient.gender}</div>
+                <div className="text-sm text-muted-foreground">Age</div>
+                <div className="font-medium">{patient.age} years</div>
+              </div>
+              
+              <div>
+                <div className="text-sm text-muted-foreground">Gender</div>
+                <div className="font-medium">{patient.gender}</div>
               </div>
               
               <div>
                 <div className="text-sm text-muted-foreground">Location</div>
-                <div className="font-medium flex items-center">
-                  <Hospital className="h-3 w-3 mr-1" />
-                  Room {patient.room}
-                  <span className="mx-1">•</span>
-                  <Bed className="h-3 w-3 mr-1" />
-                  Bed {patient.bed}
-                </div>
+                <div className="font-medium">Room {patient.room}, Bed {patient.bed}</div>
               </div>
               
               <div>
-                <div className="text-sm text-muted-foreground">Admission Date</div>
-                <div className="font-medium">{format(new Date(patient.admissionDate), 'MMM d, yyyy')}</div>
-                <div className="text-xs text-muted-foreground">
-                  {formatDistanceToNow(new Date(patient.admissionDate), { addSuffix: true })}
-                </div>
+                <div className="text-sm text-muted-foreground">Admitted</div>
+                <div className="font-medium">{format(new Date(patient.admissionDate), 'MMM dd, yyyy')}</div>
               </div>
               
               <div className="flex items-center text-xs text-muted-foreground">
@@ -196,7 +187,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
           </CardContent>
         </Card>
         
-        <Card className="md:col-span-3">
+        <Card>
           <Tabs defaultValue="sepsis">
             <CardHeader className="pb-0">
               <div className="flex justify-between items-start">
