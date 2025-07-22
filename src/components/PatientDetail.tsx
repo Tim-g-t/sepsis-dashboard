@@ -139,49 +139,56 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
       </div>
       
       <div className="grid grid-cols-1 gap-6">
-        <Card className="flex flex-col">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm flex items-center">
-              <User className="h-3 w-3 mr-1" />
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center">
+              <User className="h-5 w-5 mr-2" />
               Patient Info
             </CardTitle>
           </CardHeader>
-          <CardContent className="py-2">
-            <div className="flex items-center justify-between mb-3">
+          <CardContent className="space-y-4">
+            <div className="flex justify-center mb-6">
               <div className="text-center">
                 <div className="text-xs text-muted-foreground mb-1">Sepsis Risk</div>
                 <RiskScoreIndicator 
                   score={patient.sepsisRisk} 
-                  size="sm" 
+                  size="md" 
                   showValue={true} 
                 />
               </div>
-              <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs flex-1 ml-4">
-                <div>
-                  <span className="text-muted-foreground">Age:</span> <span className="font-medium">{patient.age}y</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Gender:</span> <span className="font-medium capitalize">{patient.gender}</span>
-                </div>
-                <div className="col-span-2">
-                  <span className="text-muted-foreground">Location:</span> <span className="font-medium">Room {patient.room}, Bed {patient.bed}</span>
-                </div>
-                <div className="col-span-2">
-                  <span className="text-muted-foreground">Admitted:</span> <span className="font-medium">{format(new Date(patient.admissionDate), 'MMM dd, yyyy')}</span>
-                </div>
-              </div>
             </div>
             
-            <div className="flex items-center justify-center text-xs text-muted-foreground pt-1 border-t">
+            <div className="space-y-4">
+              <div>
+                <div className="text-sm text-muted-foreground">Age</div>
+                <div className="font-medium">{patient.age} years</div>
+              </div>
+              
+              <div>
+                <div className="text-sm text-muted-foreground">Gender</div>
+                <div className="font-medium">{patient.gender}</div>
+              </div>
+              
+              <div>
+                <div className="text-sm text-muted-foreground">Location</div>
+                <div className="font-medium">Room {patient.room}, Bed {patient.bed}</div>
+              </div>
+              
+              <div>
+                <div className="text-sm text-muted-foreground">Admitted</div>
+                <div className="font-medium">{format(new Date(patient.admissionDate), 'MMM dd, yyyy')}</div>
+              </div>
+              
+              <div className="flex items-center text-xs text-muted-foreground">
               <Clock className="h-3 w-3 mr-1" />
               Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}
             </div>
           </CardContent>
         </Card>
         
-        <Card className="flex flex-col h-[500px]">
-          <Tabs defaultValue="sepsis" className="flex flex-col h-full">
-            <CardHeader className="pb-0 flex-shrink-0">
+        <Card>
+          <Tabs defaultValue="sepsis">
+            <CardHeader className="pb-0">
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-lg">Patient Monitoring</CardTitle>
@@ -199,8 +206,8 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
               </div>
             </CardHeader>
             
-            <CardContent className="pt-6 flex-1 overflow-hidden">
-              <TabsContent value="sepsis" className="space-y-6 h-full overflow-y-auto pr-2">
+            <CardContent className="pt-6">
+              <TabsContent value="sepsis" className="space-y-6">
                 <div>
                   <h3 className="text-sm font-medium mb-3 flex items-center">
                     <AlertCircle className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -220,7 +227,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="vitals" className="space-y-6 h-full overflow-y-auto pr-2">
+              <TabsContent value="vitals" className="space-y-6">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <Heart className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -230,7 +237,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="meds" className="space-y-6 h-full overflow-y-auto pr-2">
+              <TabsContent value="meds" className="space-y-6">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <Syringe className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -240,7 +247,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="procedures" className="space-y-6 h-full overflow-y-auto pr-2">
+              <TabsContent value="procedures" className="space-y-6">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <FileText className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -250,7 +257,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="trends" className="space-y-6 h-full overflow-y-auto pr-2">
+              <TabsContent value="trends" className="space-y-6">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <CalendarClock className="h-4 w-4 mr-1 text-muted-foreground" />

@@ -150,7 +150,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="h-full flex">
       {/* Main Dashboard - adjusts width when patient detail is open */}
-      <div className={`flex-1 transition-all duration-300 ${selectedPatient ? 'w-1/2 opacity-90' : 'w-full'}`}>
+      <div className={`flex-1 transition-all duration-300 ${selectedPatient ? 'w-1/2' : 'w-full'}`}>
         <Tabs defaultValue="sepsis" className="h-full">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
             <div>
@@ -213,17 +213,17 @@ const Dashboard: React.FC = () => {
           </div>
           
           <TabsContent value="sepsis" className="h-full space-y-6">
-            <div className={`grid grid-cols-1 md:grid-cols-3 ${selectedPatient ? 'gap-2' : 'gap-4'}`}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card>
-                <CardHeader className={selectedPatient ? "pb-1" : "pb-2"}>
-                  <CardTitle className={`${selectedPatient ? 'text-xs' : 'text-sm'} font-medium flex items-center`}>
-                    <Activity className={`${selectedPatient ? 'h-3 w-3 mr-1' : 'h-4 w-4 mr-2'} text-muted-foreground`} />
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center">
+                    <Activity className="h-4 w-4 mr-2 text-muted-foreground" />
                     Average Sepsis Risk Score
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center">
-                    <div className={`${selectedPatient ? 'text-xl' : 'text-2xl'} font-bold`}>{metrics.avgSepsisRiskScore}</div>
+                    <div className="text-2xl font-bold">{metrics.avgSepsisRiskScore}</div>
                     {metrics.sepsisRiskTrend !== 0 && (
                       <div className={`ml-2 flex items-center text-xs ${
                         metrics.sepsisRiskTrend > 0 ? 'text-critical' : 'text-success'
@@ -241,28 +241,28 @@ const Dashboard: React.FC = () => {
               </Card>
               
               <Card>
-                <CardHeader className={selectedPatient ? "pb-1" : "pb-2"}>
-                  <CardTitle className={`${selectedPatient ? 'text-xs' : 'text-sm'} font-medium flex items-center`}>
-                    <AlertCircle className={`${selectedPatient ? 'h-3 w-3 mr-1' : 'h-4 w-4 mr-2'} text-critical`} />
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center">
+                    <AlertCircle className="h-4 w-4 mr-2 text-critical" />
                     High Sepsis Risk Patients
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className={`${selectedPatient ? 'text-xl' : 'text-2xl'} font-bold`}>
+                  <div className="text-2xl font-bold">
                     {metrics.highSepsisRiskCount}
                   </div>
                 </CardContent>
               </Card>
               
               <Card>
-                <CardHeader className={selectedPatient ? "pb-1" : "pb-2"}>
-                  <CardTitle className={`${selectedPatient ? 'text-xs' : 'text-sm'} font-medium flex items-center`}>
-                    <Hospital className={`${selectedPatient ? 'h-3 w-3 mr-1' : 'h-4 w-4 mr-2'} text-muted-foreground`} />
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center">
+                    <Hospital className="h-4 w-4 mr-2 text-muted-foreground" />
                     Total Monitored ICU Patients
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className={`${selectedPatient ? 'text-xl' : 'text-2xl'} font-bold`}>
+                  <div className="text-2xl font-bold">
                     {patients.length}
                   </div>
                 </CardContent>
@@ -271,8 +271,8 @@ const Dashboard: React.FC = () => {
             
             <Card>
               <CardHeader>
-                <CardTitle className={`${selectedPatient ? 'text-base' : 'text-lg'} flex items-center`}>
-                  <AlertCircle className={`${selectedPatient ? 'h-4 w-4 mr-2' : 'h-5 w-5 mr-2'} text-critical`} />
+                <CardTitle className="text-lg flex items-center">
+                  <AlertCircle className="h-5 w-5 mr-2 text-critical" />
                   High Sepsis Risk Patients
                 </CardTitle>
                 <CardDescription>
