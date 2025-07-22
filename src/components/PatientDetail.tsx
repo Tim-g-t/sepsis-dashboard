@@ -115,77 +115,47 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <div className="text-sm text-muted-foreground">
-            {patient.diagnosis} • Attending: {patient.attendingPhysician}
-          </div>
-        </div>
-        <div className="flex items-center space-x-2">
-          {patient.sepsisRisk >= 70 && (
-            <div className="flex items-center bg-critical/10 text-critical border border-critical/30 px-3 py-1 rounded-full">
-              <AlertCircle className="h-4 w-4 mr-1" />
-              <span className="text-sm font-medium">High Sepsis Risk</span>
+    <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4">
+        {/* Compact patient info bar */}
+        <div className="bg-muted/30 rounded-lg p-3 border">
+          <div className="flex items-center justify-between gap-4">
+            {/* Left: Patient demographics and diagnosis */}
+            <div className="flex-1">
+              <div className="flex items-center gap-6 text-sm">
+                <div className="font-medium">{patient.diagnosis}</div>
+                <div className="text-muted-foreground">Dr. {patient.attendingPhysician}</div>
+              </div>
+              <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+                <span>{patient.age}y {patient.gender}</span>
+                <span>•</span>
+                <span>Rm {patient.room}/Bed {patient.bed}</span>
+                <span>•</span>
+                <span>Admitted {format(new Date(patient.admissionDate), 'MMM dd')}</span>
+                <span>•</span>
+                <span className="text-xs">Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}</span>
+              </div>
             </div>
-          )}
-          {criticalVitals.length > 0 && (
-            <div className="flex items-center">
-              <AlertCircle className="h-5 w-5 text-critical mr-1" />
-              <span className="text-critical font-medium">Critical Vitals</span>
-            </div>
-          )}
-        </div>
-      </div>
-      
-      <div className="grid grid-cols-1 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center">
-              <User className="h-5 w-5 mr-2" />
-              Patient Info
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex justify-center mb-6">
+            
+            {/* Right: Risk score and alerts */}
+            <div className="flex items-center gap-3">
+              {criticalVitals.length > 0 && (
+                <div className="flex items-center text-critical text-sm">
+                  <Thermometer className="h-4 w-4 mr-1" />
+                  <span className="font-medium">{criticalVitals.length} Critical</span>
+                </div>
+              )}
               <div className="text-center">
                 <div className="text-xs text-muted-foreground mb-1">Sepsis Risk</div>
                 <RiskScoreIndicator 
                   score={patient.sepsisRisk} 
-                  size="md" 
+                  size="sm" 
                   showValue={true} 
                 />
               </div>
             </div>
-            
-            <div className="space-y-4">
-              <div>
-                <div className="text-sm text-muted-foreground">Age</div>
-                <div className="font-medium">{patient.age} years</div>
-              </div>
-              
-              <div>
-                <div className="text-sm text-muted-foreground">Gender</div>
-                <div className="font-medium">{patient.gender}</div>
-              </div>
-              
-              <div>
-                <div className="text-sm text-muted-foreground">Location</div>
-                <div className="font-medium">Room {patient.room}, Bed {patient.bed}</div>
-              </div>
-              
-              <div>
-                <div className="text-sm text-muted-foreground">Admitted</div>
-                <div className="font-medium">{format(new Date(patient.admissionDate), 'MMM dd, yyyy')}</div>
-              </div>
-              
-              <div className="flex items-center text-xs text-muted-foreground">
-                <Clock className="h-3 w-3 mr-1" />
-                Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
         
         <Card>
           <Tabs defaultValue="sepsis">
