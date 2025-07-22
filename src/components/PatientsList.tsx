@@ -7,13 +7,15 @@ interface PatientsListProps {
   onPatientClick: (patientId: string) => void;
   filterHighSepsisRiskOnly?: boolean;
   highRiskThreshold?: number;
+  singleColumn?: boolean;
 }
 
 const PatientsList: React.FC<PatientsListProps> = ({ 
   patients, 
   onPatientClick,
   filterHighSepsisRiskOnly = false,
-  highRiskThreshold = 70
+  highRiskThreshold = 70,
+  singleColumn = false
 }) => {
   const filteredPatients = filterHighSepsisRiskOnly 
     ? patients.filter(patient => patient.sepsisRisk >= highRiskThreshold)
@@ -26,7 +28,11 @@ const PatientsList: React.FC<PatientsListProps> = ({
           No patients matching the current criteria
         </div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className={
+        singleColumn 
+          ? "grid grid-cols-1 gap-4" 
+          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      }>
         {filteredPatients.map(patient => (
           <PatientCard 
             key={patient.id} 

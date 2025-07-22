@@ -150,7 +150,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="h-full flex">
       {/* Main Dashboard - adjusts width when patient detail is open */}
-      <div className={`flex-1 transition-all duration-300 ${selectedPatient ? 'w-1/2' : 'w-full'}`}>
+      <div className={`flex-1 transition-all duration-300 ${selectedPatient ? 'w-1/2 opacity-90' : 'w-full'}`}>
         <Tabs defaultValue="sepsis" className="h-full">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
             <div>
@@ -285,6 +285,7 @@ const Dashboard: React.FC = () => {
                   onPatientClick={handlePatientClick}
                   filterHighSepsisRiskOnly={true}
                   highRiskThreshold={highRiskThreshold}
+                  singleColumn={!!selectedPatient}
                 />
               </CardContent>
             </Card>
@@ -306,6 +307,7 @@ const Dashboard: React.FC = () => {
                   patients={patients}
                   onPatientClick={handlePatientClick}
                   highRiskThreshold={highRiskThreshold}
+                  singleColumn={!!selectedPatient}
                 />
               </CardContent>
             </Card>
