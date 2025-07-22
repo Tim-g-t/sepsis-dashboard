@@ -187,9 +187,9 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
           </CardContent>
         </Card>
         
-        <Card>
-          <Tabs defaultValue="sepsis">
-            <CardHeader className="pb-0">
+        <Card className="flex flex-col h-96">
+          <Tabs defaultValue="sepsis" className="flex flex-col h-full">
+            <CardHeader className="pb-0 flex-shrink-0">
               <div className="flex justify-between items-start">
                 <div>
                   <CardTitle className="text-lg">Patient Monitoring</CardTitle>
@@ -207,8 +207,8 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
               </div>
             </CardHeader>
             
-            <CardContent className="pt-6">
-              <TabsContent value="sepsis" className="space-y-6">
+            <CardContent className="pt-6 flex-1 overflow-hidden">
+              <TabsContent value="sepsis" className="space-y-6 h-full overflow-y-auto pr-2">
                 <div>
                   <h3 className="text-sm font-medium mb-3 flex items-center">
                     <AlertCircle className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -228,7 +228,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="vitals" className="space-y-6">
+              <TabsContent value="vitals" className="space-y-6 h-full overflow-y-auto pr-2">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <Heart className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -238,7 +238,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="meds" className="space-y-6">
+              <TabsContent value="meds" className="space-y-6 h-full overflow-y-auto pr-2">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <Syringe className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -248,7 +248,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="procedures" className="space-y-6">
+              <TabsContent value="procedures" className="space-y-6 h-full overflow-y-auto pr-2">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <FileText className="h-4 w-4 mr-1 text-muted-foreground" />
@@ -258,7 +258,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="trends" className="space-y-6">
+              <TabsContent value="trends" className="space-y-6 h-full overflow-y-auto pr-2">
                 <div>
                   <h3 className="text-sm font-medium mb-2 flex items-center">
                     <CalendarClock className="h-4 w-4 mr-1 text-muted-foreground" />
