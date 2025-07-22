@@ -180,8 +180,9 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
               </div>
               
               <div className="flex items-center text-xs text-muted-foreground">
-              <Clock className="h-3 w-3 mr-1" />
-              Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}
+                <Clock className="h-3 w-3 mr-1" />
+                Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}
+              </div>
             </div>
           </CardContent>
         </Card>
