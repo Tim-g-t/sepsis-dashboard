@@ -356,8 +356,8 @@ const Dashboard: React.FC = () => {
 
       {/* Patient Detail Panel - slides in from right without overlay */}
       {selectedPatient && (
-        <div className="fixed inset-y-0 right-0 z-50 w-1/2 bg-background border-l shadow-lg animate-in slide-in-from-right duration-300">
-          <div className="flex items-center justify-between p-4 border-b">
+        <div className="fixed inset-y-0 right-0 z-50 w-1/2 bg-background border-l shadow-lg animate-in slide-in-from-right duration-300 flex flex-col">
+          <div className="flex items-center justify-between p-4 border-b flex-shrink-0">
             <h2 className="text-lg font-semibold">{selectedPatient.name}</h2>
             <Button
               variant="ghost"
@@ -369,7 +369,7 @@ const Dashboard: React.FC = () => {
               <span className="sr-only">Close</span>
             </Button>
           </div>
-          <div className="h-full overflow-y-auto p-4 pb-20">
+          <div className="flex-1 overflow-y-auto p-4">
             <PatientDetail patient={selectedPatient} onClose={handleCloseDetails} />
           </div>
         </div>

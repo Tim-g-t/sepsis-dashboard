@@ -115,7 +115,7 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
   );
 
   return (
-    <div className="h-full space-y-6">
+    <div className="space-y-6">
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="text-sm text-muted-foreground">
