@@ -140,49 +140,49 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
       
       <div className="grid grid-cols-1 gap-6">
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center">
-              <User className="h-5 w-5 mr-2" />
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base flex items-center">
+              <User className="h-4 w-4 mr-2" />
               Patient Info
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex justify-center mb-6">
+          <CardContent className="space-y-3">
+            <div className="flex justify-center mb-4">
               <div className="text-center">
                 <div className="text-xs text-muted-foreground mb-1">Sepsis Risk</div>
                 <RiskScoreIndicator 
                   score={patient.sepsisRisk} 
-                  size="md" 
+                  size="sm" 
                   showValue={true} 
                 />
               </div>
             </div>
             
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
               <div>
-                <div className="text-sm text-muted-foreground">Age</div>
-                <div className="font-medium">{patient.age} years</div>
+                <div className="text-xs text-muted-foreground">Age</div>
+                <div className="font-medium">{patient.age}y</div>
               </div>
               
               <div>
-                <div className="text-sm text-muted-foreground">Gender</div>
-                <div className="font-medium">{patient.gender}</div>
+                <div className="text-xs text-muted-foreground">Gender</div>
+                <div className="font-medium capitalize">{patient.gender}</div>
               </div>
               
-              <div>
-                <div className="text-sm text-muted-foreground">Location</div>
+              <div className="col-span-2">
+                <div className="text-xs text-muted-foreground">Location</div>
                 <div className="font-medium">Room {patient.room}, Bed {patient.bed}</div>
               </div>
               
-              <div>
-                <div className="text-sm text-muted-foreground">Admitted</div>
+              <div className="col-span-2">
+                <div className="text-xs text-muted-foreground">Admitted</div>
                 <div className="font-medium">{format(new Date(patient.admissionDate), 'MMM dd, yyyy')}</div>
               </div>
-              
-              <div className="flex items-center text-xs text-muted-foreground">
-                <Clock className="h-3 w-3 mr-1" />
-                Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}
-              </div>
+            </div>
+            
+            <div className="flex items-center text-xs text-muted-foreground pt-2 border-t">
+              <Clock className="h-3 w-3 mr-1" />
+              Updated {formatDistanceToNow(new Date(patient.lastUpdated), { addSuffix: true })}
             </div>
           </CardContent>
         </Card>
