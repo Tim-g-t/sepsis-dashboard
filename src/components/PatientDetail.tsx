@@ -145,13 +145,21 @@ const PatientDetail: React.FC<PatientDetailProps> = ({ patient, onClose }) => {
                   <span className="font-medium">{criticalVitals.length} Critical</span>
                 </div>
               )}
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-1">Sepsis Risk</div>
-                <RiskScoreIndicator 
-                  score={patient.sepsisRisk} 
-                  size="sm" 
-                  showValue={true} 
-                />
+              <div className="flex items-center gap-2">
+                <div className="flex flex-col items-center">
+                  <div className="text-xs text-muted-foreground">Sepsis Risk</div>
+                  <div className={cn(
+                    "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm mt-1",
+                    patient.sepsisRisk >= 70 ? "bg-critical text-white" :
+                    patient.sepsisRisk >= 40 ? "bg-warning text-white" :
+                    "bg-success text-white"
+                  )}>
+                    {patient.sepsisRisk}
+                  </div>
+                </div>
+                {patient.sepsisRisk >= 70 && (
+                  <AlertCircle className="h-5 w-5 text-critical" />
+                )}
               </div>
             </div>
           </div>
