@@ -25,10 +25,7 @@ import {
   Thermometer,
   Hospital,
   Settings,
-  X,
-  Shield,
-  Zap,
-  TrendingUp
+  X
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { Input } from "@/components/ui/input";
@@ -156,7 +153,7 @@ const Dashboard: React.FC = () => {
   };
   
   return (
-    <div className="h-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="h-full bg-background">
       {selectedPatient ? (
         <ResizablePanelGroup direction="horizontal" className="h-full">
           {/* Main Dashboard Panel */}
@@ -167,21 +164,23 @@ const Dashboard: React.FC = () => {
             className="overflow-y-auto medical-scroll"
           >
             <div className="p-6">
-              {/* Enhanced Header */}
+              {/* Simple Header */}
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center space-x-4">
                     <img 
                       src="/predicaid_logo.png" 
                       alt="PredicAid" 
-                      className="h-12 w-auto"
+                      className="h-10 w-auto"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
                     <div>
-                      <h1 className="text-3xl font-bold medical-title">
+                      <h1 className="text-2xl font-bold text-foreground">
                         ICU Sepsis Monitoring
                       </h1>
-                      <p className="text-slate-600 dark:text-slate-300 flex items-center mt-1">
-                        <Shield className="h-4 w-4 mr-2 text-blue-500" />
+                      <p className="text-muted-foreground mt-1">
                         Real-time sepsis risk prediction and patient monitoring
                       </p>
                     </div>
@@ -189,11 +188,7 @@ const Dashboard: React.FC = () => {
                   
                   {/* Status Bar */}
                   <div className="flex items-center space-x-6">
-                    <div className="flex items-center glass-card px-4 py-2 rounded-lg">
-                      <div className="status-dot-success"></div>
-                      <span className="text-sm font-medium">System Online</span>
-                    </div>
-                    <div className="flex items-center text-sm text-slate-600 dark:text-slate-300">
+                    <div className="flex items-center text-sm text-muted-foreground">
                       <Clock className="h-4 w-4 mr-2" />
                       <span>Last updated {formatDistanceToNow(lastUpdated, { addSuffix: true })}</span>
                     </div>
@@ -204,7 +199,7 @@ const Dashboard: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <Tabs defaultValue="sepsis" className="w-full">
                     <div className="flex items-center justify-between">
-                      <TabsList className="glass-card">
+                      <TabsList>
                         <TabsTrigger value="sepsis" className="flex items-center">
                           <AlertCircle className="h-4 w-4 mr-2" />
                           Sepsis Risk
@@ -221,12 +216,12 @@ const Dashboard: React.FC = () => {
                       
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="glass-card">
+                          <Button variant="ghost" size="icon">
                             <Settings className="h-5 w-5" />
                             <span className="sr-only">Open settings</span>
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-64 p-2 glass-card">
+                        <DropdownMenuContent align="end" className="w-64 p-2">
                           <DropdownMenuLabel className="px-2 py-1.5 text-base font-semibold">Settings</DropdownMenuLabel>
                           <DropdownMenuSeparator />
                           <div className="px-2 py-2">
@@ -260,25 +255,23 @@ const Dashboard: React.FC = () => {
                     </div>
                     
                     <TabsContent value="sepsis" className="mt-6 space-y-6">
-                      {/* Enhanced Metrics Cards */}
+                      {/* Simple Metrics Cards */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <Card className="medical-card medical-card-success">
+                        <Card className="medical-card">
                           <CardHeader className="pb-3">
                             <CardTitle className="text-sm font-medium flex items-center">
-                              <Activity className="h-5 w-5 mr-2 text-emerald-500" />
+                              <Activity className="h-4 w-4 mr-2 text-muted-foreground" />
                               Average Sepsis Risk Score
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
                             <div className="flex items-center justify-between">
-                              <div className="text-3xl font-bold text-emerald-600">
+                              <div className="text-2xl font-bold">
                                 {metrics.avgSepsisRiskScore}
                               </div>
                               {metrics.sepsisRiskTrend !== 0 && (
-                                <div className={`flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                  metrics.sepsisRiskTrend > 0 
-                                    ? 'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400' 
-                                    : 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                                <div className={`flex items-center text-xs ${
+                                  metrics.sepsisRiskTrend > 0 ? 'text-critical' : 'text-success'
                                 }`}>
                                   {metrics.sepsisRiskTrend > 0 ? (
                                     <ArrowUp className="h-3 w-3 mr-1" />
@@ -289,30 +282,19 @@ const Dashboard: React.FC = () => {
                                 </div>
                               )}
                             </div>
-                            <div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                              Population average
-                            </div>
                           </CardContent>
                         </Card>
                         
-                        <Card className="medical-card medical-card-critical">
+                        <Card className="medical-card">
                           <CardHeader className="pb-3">
                             <CardTitle className="text-sm font-medium flex items-center">
-                              <AlertCircle className="h-5 w-5 mr-2 text-red-500" />
+                              <AlertCircle className="h-4 w-4 mr-2 text-critical" />
                               High Sepsis Risk Patients
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <div className="flex items-center justify-between">
-                              <div className="text-3xl font-bold text-red-600">
-                                {metrics.highSepsisRiskCount}
-                              </div>
-                              <div className="flex items-center">
-                                <Zap className="h-5 w-5 text-red-500" />
-                              </div>
-                            </div>
-                            <div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                              Requiring immediate attention
+                            <div className="text-2xl font-bold text-critical">
+                              {metrics.highSepsisRiskCount}
                             </div>
                           </CardContent>
                         </Card>
@@ -320,37 +302,26 @@ const Dashboard: React.FC = () => {
                         <Card className="medical-card">
                           <CardHeader className="pb-3">
                             <CardTitle className="text-sm font-medium flex items-center">
-                              <Hospital className="h-5 w-5 mr-2 text-blue-500" />
+                              <Hospital className="h-4 w-4 mr-2 text-muted-foreground" />
                               Total Monitored ICU Patients
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <div className="flex items-center justify-between">
-                              <div className="text-3xl font-bold text-blue-600">
-                                {patients.length}
-                              </div>
-                              <div className="flex items-center">
-                                <TrendingUp className="h-5 w-5 text-blue-500" />
-                              </div>
-                            </div>
-                            <div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                              Active monitoring
+                            <div className="text-2xl font-bold">
+                              {patients.length}
                             </div>
                           </CardContent>
                         </Card>
                       </div>
                       
-                      {/* Enhanced Patient List Card */}
+                      {/* Patient List Card */}
                       <Card className="medical-card">
-                        <CardHeader className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-t-lg">
+                        <CardHeader>
                           <CardTitle className="text-lg flex items-center">
-                            <AlertCircle className="h-6 w-6 mr-3 text-red-500" />
+                            <AlertCircle className="h-5 w-5 mr-2 text-critical" />
                             High Sepsis Risk Patients
-                            <span className="ml-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full">
-                              {metrics.highSepsisRiskCount}
-                            </span>
                           </CardTitle>
-                          <CardDescription className="text-slate-600 dark:text-slate-300">
+                          <CardDescription>
                             Patients with elevated sepsis risk scores requiring immediate attention
                           </CardDescription>
                         </CardHeader>
@@ -368,15 +339,12 @@ const Dashboard: React.FC = () => {
                     
                     <TabsContent value="patients" className="mt-6 space-y-6">
                       <Card className="medical-card">
-                        <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-t-lg">
+                        <CardHeader>
                           <CardTitle className="text-lg flex items-center">
-                            <Users className="h-6 w-6 mr-3 text-blue-500" />
+                            <Users className="h-5 w-5 mr-2" />
                             All ICU Patients
-                            <span className="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded-full">
-                              {patients.length}
-                            </span>
                           </CardTitle>
-                          <CardDescription className="text-slate-600 dark:text-slate-300">
+                          <CardDescription>
                             Complete list of monitored patients
                           </CardDescription>
                         </CardHeader>
@@ -393,41 +361,37 @@ const Dashboard: React.FC = () => {
                     
                     <TabsContent value="departments" className="mt-6 space-y-6">
                       <Card className="medical-card">
-                        <CardHeader className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-t-lg">
+                        <CardHeader>
                           <CardTitle className="text-lg flex items-center">
-                            <ChartBar className="h-6 w-6 mr-3 text-purple-500" />
+                            <ChartBar className="h-5 w-5 mr-2" />
                             ICU Unit Analysis
                           </CardTitle>
-                          <CardDescription className="text-slate-600 dark:text-slate-300">
+                          <CardDescription>
                             Sepsis risk breakdown by ICU unit
                           </CardDescription>
                         </CardHeader>
                         <CardContent className="p-6">
-                          <div className="chart-container">
-                            <DepartmentRisksChart data={departmentRisks} />
-                          </div>
+                          <DepartmentRisksChart data={departmentRisks} />
                           
                           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                             {departmentRisks.map(dept => (
                               <Card key={dept.department} className="medical-card">
                                 <CardHeader className="pb-3">
                                   <CardTitle className="text-base flex items-center">
-                                    <Hospital className="h-4 w-4 mr-2 text-slate-500" />
+                                    <Hospital className="h-4 w-4 mr-2 text-muted-foreground" />
                                     {dept.department}
                                   </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                  <div className="grid grid-cols-2 gap-4 text-sm">
-                                    <div className="space-y-2">
-                                      <div className="text-slate-600 dark:text-slate-400">Average Risk:</div>
-                                      <div className="text-slate-600 dark:text-slate-400">Patients:</div>
-                                      <div className="text-slate-600 dark:text-slate-400">High Risk:</div>
-                                    </div>
-                                    <div className="space-y-2 text-right">
-                                      <div className="font-bold text-lg">{dept.averageRiskScore}</div>
-                                      <div className="font-semibold">{dept.patientsCount}</div>
-                                      <div className="font-semibold text-red-600">{dept.highRiskCount}</div>
-                                    </div>
+                                  <div className="grid grid-cols-2 gap-2 text-sm">
+                                    <div className="text-muted-foreground">Average Risk:</div>
+                                    <div className="font-medium text-right">{dept.averageRiskScore}</div>
+                                    
+                                    <div className="text-muted-foreground">Patients:</div>
+                                    <div className="font-medium text-right">{dept.patientsCount}</div>
+                                    
+                                    <div className="text-muted-foreground">High Risk:</div>
+                                    <div className="font-medium text-right text-critical">{dept.highRiskCount}</div>
                                   </div>
                                 </CardContent>
                               </Card>
@@ -443,31 +407,31 @@ const Dashboard: React.FC = () => {
           </ResizablePanel>
 
           {/* Resize Handle */}
-          <ResizableHandle withHandle className="bg-slate-200 dark:bg-slate-700 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors" />
+          <ResizableHandle withHandle />
 
           {/* Patient Detail Panel */}
           <ResizablePanel 
             defaultSize={50} 
             minSize={25} 
             maxSize={75}
-            className="bg-white dark:bg-slate-800 shadow-2xl flex flex-col overflow-hidden border-l border-slate-200 dark:border-slate-700"
+            className="bg-background border-l flex flex-col overflow-hidden"
           >
-            <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-slate-700">
-              <h2 className="text-xl font-bold text-slate-800 dark:text-white flex items-center">
-                <Heart className="h-5 w-5 mr-3 text-red-500" />
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold flex items-center">
+                <Heart className="h-4 w-4 mr-2 text-critical" />
                 {selectedPatient.name}
               </h2>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={handleCloseDetails}
-                className="h-10 w-10 hover:bg-red-100 dark:hover:bg-red-900/20"
+                className="h-8 w-8"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
                 <span className="sr-only">Close</span>
               </Button>
             </div>
-            <div className="flex-1 overflow-y-auto p-6 medical-scroll">
+            <div className="flex-1 overflow-y-auto p-4 medical-scroll">
               <PatientDetail patient={selectedPatient} onClose={handleCloseDetails} />
             </div>
           </ResizablePanel>
@@ -476,44 +440,42 @@ const Dashboard: React.FC = () => {
         // When no patient is selected, show full width dashboard
         <div className="h-full overflow-y-auto medical-scroll">
           <div className="p-6">
-            {/* Enhanced Header for full width */}
+            {/* Header for full width */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <img 
                     src="/predicaid_logo.png" 
                     alt="PredicAid" 
-                    className="h-16 w-auto"
+                    className="h-12 w-auto"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
                   <div>
-                    <h1 className="text-4xl font-bold medical-title">
+                    <h1 className="text-3xl font-bold text-foreground">
                       ICU Sepsis Monitoring Dashboard
                     </h1>
-                    <p className="text-slate-600 dark:text-slate-300 flex items-center mt-2">
-                      <Shield className="h-5 w-5 mr-2 text-blue-500" />
-                      Real-time sepsis risk prediction and patient monitoring powered by AI
+                    <p className="text-muted-foreground mt-1">
+                      Real-time sepsis risk prediction and patient monitoring
                     </p>
                   </div>
                 </div>
                 
                 {/* Status Bar */}
                 <div className="flex items-center space-x-6">
-                  <div className="flex items-center glass-card px-4 py-2 rounded-lg">
-                    <div className="status-dot-success"></div>
-                    <span className="text-sm font-medium">System Online</span>
-                  </div>
-                  <div className="flex items-center text-sm text-slate-600 dark:text-slate-300">
+                  <div className="flex items-center text-sm text-muted-foreground">
                     <Clock className="h-4 w-4 mr-2" />
                     <span>Last updated {formatDistanceToNow(lastUpdated, { addSuffix: true })}</span>
                   </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="glass-card">
+                      <Button variant="ghost" size="icon">
                         <Settings className="h-5 w-5" />
                         <span className="sr-only">Open settings</span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-64 p-2 glass-card">
+                    <DropdownMenuContent align="end" className="w-64 p-2">
                       <DropdownMenuLabel className="px-2 py-1.5 text-base font-semibold">Settings</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <div className="px-2 py-2">
@@ -549,7 +511,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             <Tabs defaultValue="sepsis" className="h-full">
-              <TabsList className="glass-card mb-6">
+              <TabsList className="mb-6">
                 <TabsTrigger value="sepsis" className="flex items-center">
                   <AlertCircle className="h-4 w-4 mr-2" />
                   Sepsis Risk
@@ -564,27 +526,24 @@ const Dashboard: React.FC = () => {
                 </TabsTrigger>
               </TabsList>
               
-              {/* Rest of the content remains the same but with enhanced styling... */}
               <TabsContent value="sepsis" className="space-y-6">
-                {/* Enhanced Metrics Cards */}
+                {/* Simple Metrics Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="medical-card medical-card-success">
+                  <Card className="medical-card">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-sm font-medium flex items-center">
-                        <Activity className="h-5 w-5 mr-2 text-emerald-500" />
+                        <Activity className="h-4 w-4 mr-2 text-muted-foreground" />
                         Average Sepsis Risk Score
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="flex items-center justify-between">
-                        <div className="text-3xl font-bold text-emerald-600">
+                        <div className="text-2xl font-bold">
                           {metrics.avgSepsisRiskScore}
                         </div>
                         {metrics.sepsisRiskTrend !== 0 && (
-                          <div className={`flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                            metrics.sepsisRiskTrend > 0 
-                              ? 'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400' 
-                              : 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                          <div className={`flex items-center text-xs ${
+                            metrics.sepsisRiskTrend > 0 ? 'text-critical' : 'text-success'
                           }`}>
                             {metrics.sepsisRiskTrend > 0 ? (
                               <ArrowUp className="h-3 w-3 mr-1" />
@@ -595,30 +554,19 @@ const Dashboard: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      <div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                        Population average
-                      </div>
                     </CardContent>
                   </Card>
                   
-                  <Card className="medical-card medical-card-critical">
+                  <Card className="medical-card">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-sm font-medium flex items-center">
-                        <AlertCircle className="h-5 w-5 mr-2 text-red-500" />
+                        <AlertCircle className="h-4 w-4 mr-2 text-critical" />
                         High Sepsis Risk Patients
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex items-center justify-between">
-                        <div className="text-3xl font-bold text-red-600">
-                          {metrics.highSepsisRiskCount}
-                        </div>
-                        <div className="flex items-center">
-                          <Zap className="h-5 w-5 text-red-500" />
-                        </div>
-                      </div>
-                      <div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                        Requiring immediate attention
+                      <div className="text-2xl font-bold text-critical">
+                        {metrics.highSepsisRiskCount}
                       </div>
                     </CardContent>
                   </Card>
@@ -626,36 +574,25 @@ const Dashboard: React.FC = () => {
                   <Card className="medical-card">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-sm font-medium flex items-center">
-                        <Hospital className="h-5 w-5 mr-2 text-blue-500" />
+                        <Hospital className="h-4 w-4 mr-2 text-muted-foreground" />
                         Total Monitored ICU Patients
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex items-center justify-between">
-                        <div className="text-3xl font-bold text-blue-600">
-                          {patients.length}
-                        </div>
-                        <div className="flex items-center">
-                          <TrendingUp className="h-5 w-5 text-blue-500" />
-                        </div>
-                      </div>
-                      <div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                        Active monitoring
+                      <div className="text-2xl font-bold">
+                        {patients.length}
                       </div>
                     </CardContent>
                   </Card>
                 </div>
                 
                 <Card className="medical-card">
-                  <CardHeader className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-t-lg">
+                  <CardHeader>
                     <CardTitle className="text-lg flex items-center">
-                      <AlertCircle className="h-6 w-6 mr-3 text-red-500" />
+                      <AlertCircle className="h-5 w-5 mr-2 text-critical" />
                       High Sepsis Risk Patients
-                      <span className="ml-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full">
-                        {metrics.highSepsisRiskCount}
-                      </span>
                     </CardTitle>
-                    <CardDescription className="text-slate-600 dark:text-slate-300">
+                    <CardDescription>
                       Patients with elevated sepsis risk scores requiring immediate attention
                     </CardDescription>
                   </CardHeader>
@@ -673,15 +610,12 @@ const Dashboard: React.FC = () => {
               
               <TabsContent value="patients" className="space-y-6">
                 <Card className="medical-card">
-                  <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-t-lg">
+                  <CardHeader>
                     <CardTitle className="text-lg flex items-center">
-                      <Users className="h-6 w-6 mr-3 text-blue-500" />
+                      <Users className="h-5 w-5 mr-2" />
                       All ICU Patients
-                      <span className="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded-full">
-                        {patients.length}
-                      </span>
                     </CardTitle>
-                    <CardDescription className="text-slate-600 dark:text-slate-300">
+                    <CardDescription>
                       Complete list of monitored patients
                     </CardDescription>
                   </CardHeader>
@@ -698,41 +632,37 @@ const Dashboard: React.FC = () => {
               
               <TabsContent value="departments" className="space-y-6">
                 <Card className="medical-card">
-                  <CardHeader className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-t-lg">
+                  <CardHeader>
                     <CardTitle className="text-lg flex items-center">
-                      <ChartBar className="h-6 w-6 mr-3 text-purple-500" />
+                      <ChartBar className="h-5 w-5 mr-2" />
                       ICU Unit Analysis
                     </CardTitle>
-                    <CardDescription className="text-slate-600 dark:text-slate-300">
+                    <CardDescription>
                       Sepsis risk breakdown by ICU unit
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="p-6">
-                    <div className="chart-container">
-                      <DepartmentRisksChart data={departmentRisks} />
-                    </div>
+                    <DepartmentRisksChart data={departmentRisks} />
                     
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                       {departmentRisks.map(dept => (
                         <Card key={dept.department} className="medical-card">
                           <CardHeader className="pb-3">
                             <CardTitle className="text-base flex items-center">
-                              <Hospital className="h-4 w-4 mr-2 text-slate-500" />
+                              <Hospital className="h-4 w-4 mr-2 text-muted-foreground" />
                               {dept.department}
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <div className="grid grid-cols-2 gap-4 text-sm">
-                              <div className="space-y-2">
-                                <div className="text-slate-600 dark:text-slate-400">Average Risk:</div>
-                                <div className="text-slate-600 dark:text-slate-400">Patients:</div>
-                                <div className="text-slate-600 dark:text-slate-400">High Risk:</div>
-                              </div>
-                              <div className="space-y-2 text-right">
-                                <div className="font-bold text-lg">{dept.averageRiskScore}</div>
-                                <div className="font-semibold">{dept.patientsCount}</div>
-                                <div className="font-semibold text-red-600">{dept.highRiskCount}</div>
-                              </div>
+                            <div className="grid grid-cols-2 gap-2 text-sm">
+                              <div className="text-muted-foreground">Average Risk:</div>
+                              <div className="font-medium text-right">{dept.averageRiskScore}</div>
+                              
+                              <div className="text-muted-foreground">Patients:</div>
+                              <div className="font-medium text-right">{dept.patientsCount}</div>
+                              
+                              <div className="text-muted-foreground">High Risk:</div>
+                              <div className="font-medium text-right text-critical">{dept.highRiskCount}</div>
                             </div>
                           </CardContent>
                         </Card>
