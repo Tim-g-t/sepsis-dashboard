@@ -5,78 +5,115 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 248 250 252;
+    --foreground: 15 23 42;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
  
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 42;
  
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 14 165 233;
+    --primary-foreground: 248 250 252;
  
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 241 245 249;
+    --secondary-foreground: 51 65 85;
  
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
  
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 239 246 255;
+    --accent-foreground: 29 78 216;
  
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 248 250 252;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 14 165 233;
  
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Medical colors */
-    --critical: 0 100% 50%;
-    --critical-light: 0 100% 97%;
-    --critical-dark: 0 100% 45%;
+    /* Enhanced Medical colors for ICU environment */
+    --critical: 220 38 38;
+    --critical-light: 254 242 242;
+    --critical-dark: 185 28 28;
+    --critical-glow: 239 68 68;
     
-    --warning: 38 92% 50%;
-    --warning-light: 38 92% 95%;
-    --warning-dark: 38 92% 35%;
+    --warning: 245 158 11;
+    --warning-light: 255 251 235;
+    --warning-dark: 217 119 6;
+    --warning-glow: 251 191 36;
     
-    --success: 142 71% 45%;
-    --success-light: 142 71% 95%;
-    --success-dark: 142 71% 35%;
+    --success: 34 197 94;
+    --success-light: 240 253 244;
+    --success-dark: 22 163 74;
+    --success-glow: 74 222 128;
+
+    /* Medical blue palette */
+    --medical-blue: 37 99 235;
+    --medical-blue-light: 239 246 255;
+    --medical-blue-dark: 29 78 216;
+    
+    /* ICU monitoring colors */
+    --monitor-green: 16 185 129;
+    --monitor-amber: 245 158 11;
+    --monitor-red: 239 68 68;
+    --monitor-blue: 59 130 246;
+    
+    /* Gradient backgrounds */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--medical-blue)) 0%, hsl(var(--primary)) 100%);
+    --gradient-critical: linear-gradient(135deg, hsl(var(--critical)) 0%, hsl(var(--critical-dark)) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)) 0%, hsl(var(--success-dark)) 100%);
+    --gradient-warning: linear-gradient(135deg, hsl(var(--warning)) 0%, hsl(var(--warning-dark)) 100%);
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 15 23 42;
+    --foreground: 248 250 252;
  
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
  
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 30 41 59;
+    --popover-foreground: 248 250 252;
  
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 56 189 248;
+    --primary-foreground: 15 23 42;
  
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 51 65 85;
+    --secondary-foreground: 226 232 240;
  
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
  
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 30 58 138;
+    --accent-foreground: 226 232 240;
  
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 248 250 252;
  
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 51 65 85;
+    --input: 51 65 85;
+    --ring: 56 189 248;
+
+    /* Dark mode medical colors */
+    --critical: 248 113 113;
+    --critical-light: 69 26 26;
+    --critical-dark: 220 38 38;
+    
+    --warning: 251 191 36;
+    --warning-light: 69 39 11;
+    --warning-dark: 245 158 11;
+    
+    --success: 74 222 128;
+    --success-light: 20 83 45;
+    --success-dark: 34 197 94;
+
+    --medical-blue: 96 165 250;
+    --medical-blue-light: 30 58 138;
+    --medical-blue-dark: 37 99 235;
   }
 }
  
@@ -86,50 +123,249 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
 
-/* Risk indicator pulse animation */
-.risk-indicator {
-  position: relative;
+/* Enhanced animations for medical monitoring */
+@keyframes pulse-critical {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--critical-glow) / 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px hsl(var(--critical-glow) / 0);
+    transform: scale(1.05);
+  }
 }
 
-.risk-high::after {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border-radius: 50%;
-  border: 2px solid hsl(var(--critical));
-  opacity: 0;
-  animation: pulse 2s infinite;
+@keyframes pulse-warning {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--warning-glow) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px hsl(var(--warning-glow) / 0);
+  }
 }
 
-@keyframes pulse {
-  0% {
+@keyframes pulse-success {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--success-glow) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px hsl(var(--success-glow) / 0);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 50%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  75% {
     transform: scale(0.95);
-    opacity: 0;
+  }
+}
+
+@keyframes vital-blink {
+  0%, 100% {
+    opacity: 1;
   }
   50% {
     opacity: 0.6;
   }
-  100% {
-    transform: scale(1.1);
-    opacity: 0;
+}
+
+/* Risk indicator animations */
+.risk-indicator {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.risk-high {
+  animation: pulse-critical 2s infinite;
+}
+
+.risk-medium {
+  animation: pulse-warning 3s infinite;
+}
+
+.risk-low {
+  animation: pulse-success 4s infinite;
+}
+
+/* Medical card enhancements */
+.medical-card {
+  background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.medical-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.medical-card-critical {
+  border-left: 4px solid hsl(var(--critical));
+  background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--critical-light)) 100%);
+}
+
+.medical-card-warning {
+  border-left: 4px solid hsl(var(--warning));
+  background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--warning-light)) 100%);
+}
+
+.medical-card-success {
+  border-left: 4px solid hsl(var(--success));
+  background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--success-light)) 100%);
+}
+
+/* Vital signs styling */
+.vital-critical {
+  animation: vital-blink 1.5s infinite;
+  color: hsl(var(--critical));
+  font-weight: 700;
+}
+
+.vital-normal {
+  color: hsl(var(--success));
+}
+
+.vital-warning {
+  color: hsl(var(--warning));
+}
+
+/* Dashboard header gradient */
+.dashboard-header {
+  background: var(--gradient-primary);
+  background-attachment: fixed;
+}
+
+/* Medical button styles */
+.btn-medical-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-medical-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -8px hsl(var(--primary));
+}
+
+.btn-medical-critical {
+  background: var(--gradient-critical);
+  border: none;
+  color: white;
+}
+
+.btn-medical-critical:hover {
+  box-shadow: 0 8px 25px -8px hsl(var(--critical));
+}
+
+/* Status indicators */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.status-dot-critical {
+  background: hsl(var(--critical));
+  animation: pulse-critical 2s infinite;
+}
+
+.status-dot-warning {
+  background: hsl(var(--warning));
+  animation: pulse-warning 3s infinite;
+}
+
+.status-dot-success {
+  background: hsl(var(--success));
+  animation: pulse-success 4s infinite;
+}
+
+/* Glassmorphism effects for modern ICU look */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-card {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(51, 65, 85, 0.3);
+}
+
+/* Chart enhancements */
+.chart-container {
+  background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted) / 0.3) 100%);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+/* Loading animations */
+@keyframes medical-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 
-/* Progress bars for vital signs */
-[data-status="critical"].h-2 [class*="bg-primary"] {
-  @apply bg-critical;
+.medical-loading {
+  animation: medical-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-[data-status="warning"].h-2 [class*="bg-primary"] {
-  @apply bg-warning;
+/* Typography improvements */
+.medical-title {
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-[data-status="normal"].h-2 [class*="bg-primary"] {
-  @apply bg-success;
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .medical-card {
+    margin-bottom: 1rem;
+  }
+  
+  .risk-indicator {
+    transform: scale(0.9);
+  }
+}
+
+/* Accessibility improvements */
+.focus-medical:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for medical theme */
+.medical-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.medical-scroll::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+.medical-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 3px;
+}
+
+.medical-scroll::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary-foreground));
 }
